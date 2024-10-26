@@ -1,6 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
-import {request} from '@umijs/max';
+import { request } from '@umijs/max';
 
 /** 添加用户 POST /api/user/addUser */
 export async function addUserUsingPost(body: API.UserAddRequest, options?: { [key: string]: any }) {
@@ -86,21 +86,6 @@ export async function userRegisterUsingPost(
       'Content-Type': 'application/json',
     },
     data: body,
-    ...(options || {}),
-  });
-}
-
-/** 用户查询 GET /api/user/search */
-export async function searchUsersUsingGet(
-  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.searchUsersUsingGETParams,
-  options?: { [key: string]: any },
-) {
-  return request<API.BaseResponseListSafetyUser>('/api/user/search', {
-    method: 'GET',
-    params: {
-      ...params,
-    },
     ...(options || {}),
   });
 }

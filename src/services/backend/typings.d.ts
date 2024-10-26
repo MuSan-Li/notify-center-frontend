@@ -11,15 +11,27 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseListSafetyUser = {
-    code?: number;
-    data?: SafetyUser[];
-    message?: string;
-  };
-
   type BaseResponselong = {
     code?: number;
     data?: number;
+    message?: string;
+  };
+
+  type BaseResponsePageEmailConfigResp = {
+    code?: number;
+    data?: PageEmailConfigResp;
+    message?: string;
+  };
+
+  type BaseResponsePageNotifyConfigResp = {
+    code?: number;
+    data?: PageNotifyConfigResp;
+    message?: string;
+  };
+
+  type BaseResponsePageNotifyLogResp = {
+    code?: number;
+    data?: PageNotifyLogResp;
     message?: string;
   };
 
@@ -33,6 +45,27 @@ declare namespace API {
     code?: number;
     data?: SafetyUser;
     message?: string;
+  };
+
+  type EmailConfigPageReq = {
+    current?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    username?: string;
+  };
+
+  type EmailConfigResp = {
+    createTime?: string;
+    host?: string;
+    id?: number;
+    password?: string;
+    port?: string;
+    props?: string;
+    remarks?: string;
+    status?: number;
+    updateTime?: string;
+    username?: string;
   };
 
   type ModelAndView = {
@@ -113,9 +146,90 @@ declare namespace API {
     viewName?: string;
   };
 
+  type NotifyConfigPageReq = {
+    current?: number;
+    name?: string;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+  };
+
+  type NotifyConfigResp = {
+    content?: string;
+    corn?: string;
+    createTime?: string;
+    id?: number;
+    name?: string;
+    notifyType?: number;
+    remarks?: string;
+    status?: number;
+    updateTime?: string;
+  };
+
+  type NotifyLogPageReq = {
+    current?: number;
+    notifyConfigId?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+  };
+
+  type NotifyLogResp = {
+    createTime?: string;
+    id?: number;
+    notifyConfigId?: number;
+    notifyConfigName?: string;
+    notifyType?: number;
+    status?: number;
+    updateTime?: string;
+  };
+
+  type NotifySendRequest = {
+    id?: number;
+  };
+
   type OrderItem = {
     asc?: boolean;
     column?: string;
+  };
+
+  type PageEmailConfigResp = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: EmailConfigResp[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageNotifyConfigResp = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: NotifyConfigResp[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageNotifyLogResp = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: NotifyLogResp[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
   };
 
   type PageSafetyUser = {
@@ -142,11 +256,6 @@ declare namespace API {
     userRole?: number;
     userStatus?: number;
     username?: string;
-  };
-
-  type searchUsersUsingGETParams = {
-    /** userAccount */
-    userAccount?: string;
   };
 
   type UserAddRequest = {
