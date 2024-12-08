@@ -40,7 +40,7 @@ const CreateModal: React.FC<Props> = (props) => {
   return (
     <Modal
       destroyOnClose
-      title={'创建用户'}
+      title={'创建订阅信息'}
       open={visible}
       footer={null}
       onCancel={() => {
@@ -55,6 +55,9 @@ const CreateModal: React.FC<Props> = (props) => {
           if (success) {
             onSubmit?.(values);
           }
+        }}
+        search={{
+          resetText: null,  // 设置为 null 隐藏重置按钮
         }}
       />
     </Modal>

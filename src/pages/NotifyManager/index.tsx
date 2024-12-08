@@ -1,6 +1,9 @@
 import CreateModal from '@/pages/NotifyManager/components/CreateModal';
 import UpdateModal from '@/pages/NotifyManager/components/UpdateModal';
-import { getNotifyConfigPageUsingPost } from '@/services/backend/notifyConfigController';
+import {
+  getNotifyConfigPageUsingPost,
+  sendNotifyUsingPost,
+} from '@/services/backend/notifyConfigController';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
@@ -19,6 +22,19 @@ const TableList: React.FC = () => {
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<API.NotifyConfigResp>();
+
+  const handleAction = async (row: API.SafetyUser) => {
+    console.log(' 测试一下，row:{}', row);
+    try {
+      const result = await sendNotifyUsingPost({
+        id: row.id,
+      });
+      console.log(' 测试一下，result:{}', result);
+      message.success('发送成功！');
+    } catch (error: e) {
+      console.error('测试一下发送失败，' + e.message);
+    }
+  };
 
   /**
    * 删除节点
@@ -70,7 +86,7 @@ const TableList: React.FC = () => {
     },
     {
       title: '订阅名称',
-      dataIndex: 'name',
+      dataIndex: 'notifyName',
       valueType: 'text',
     },
     {
@@ -107,14 +123,13 @@ const TableList: React.FC = () => {
     },
     {
       title: '状态',
-      dataIndex: 'status',
-      hideInForm: true,
+      dataIndex: 'notifyStatus',
       hideInSearch: true,
       valueEnum: {
-        0: {
-          text: '正常',
+        '0': {
+          text: '启用',
         },
-        1: {
+        '1': {
           text: '禁用',
           status: 'Error',
         },
@@ -122,10 +137,14 @@ const TableList: React.FC = () => {
     },
     {
       title: '操作',
+      width: '10%',
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => (
         <Space size="middle">
+          <Typography.Link type="warning" onClick={() => handleAction(record)}>
+            测试一下
+          </Typography.Link>
           <Typography.Link
             onClick={() => {
               setCurrentRow(record);

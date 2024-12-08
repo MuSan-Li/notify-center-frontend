@@ -160,9 +160,9 @@ declare namespace API {
     createTime?: string;
     id?: number;
     name?: string;
+    notifyStatus?: string;
     notifyType?: number;
     remarks?: string;
-    status?: number;
     updateTime?: string;
   };
 

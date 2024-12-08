@@ -7,6 +7,7 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import '@umijs/max';
 import { Button, message, Modal, Space, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
+import { deleteUserUsingPost } from '@/services/backend/userController';
 
 const TableList: React.FC = () => {
   /**
